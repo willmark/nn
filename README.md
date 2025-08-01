@@ -1,68 +1,75 @@
-# 🧠 Residual vs Plain Blocks in PyTorch
+# 🧠 Neural Network Examples in PyTorch
 
-A minimal PyTorch demonstration contrasting Residual Blocks and Plain (Linear) Blocks to showcase the impact of residual connections on gradient flow during backpropagation.
+A collection of minimal PyTorch demonstrations showcasing fundamental neural network concepts and architectures. Each example is designed to be educational, self-contained, and easy to understand.
 
 ## 📋 Overview
 
-Residual connections, introduced in ResNet, are widely known to improve training in deep neural networks by mitigating vanishing gradient problems. This educational example demonstrates how residual connections:
+This repository contains practical examples that demonstrate key concepts in deep learning:
 
-- **Improve gradient flow** through the network
-- **Maintain signal strength** across layers  
-- **Alter gradients** received by earlier layers and inputs
+- **Residual Connections**: How skip connections improve gradient flow
+- **Attention Mechanisms**: Basic scaled dot-product attention implementation
 
-## 🏗️ Architecture
+## 🏗️ Examples
 
-### Block Types
+### 1. Residual vs Plain Blocks (`compare_blocks.py`)
 
-The script implements two fundamental block types:
+Demonstrates the impact of residual connections on gradient flow during backpropagation.
 
-1. **ResidualBlock**: Applies a linear transformation and adds the input (skip connection)
-2. **PlainBlock**: Applies the same linear transformation without any skip connection
+**Key Concepts:**
+- **ResidualBlock**: Applies linear transformation and adds input (skip connection)
+- **PlainBlock**: Applies same linear transformation without skip connection
+- **Gradient Flow**: Comparison of gradient magnitudes and vanishing gradient problem
 
-### Network Structure
+**Results:**
+- Residual networks maintain stronger gradients and higher outputs
+- Plain networks show rapid gradient attenuation through depth
 
-- **Depth**: 10 layers (configurable)
-- **Input**: Fixed 3-dimensional tensor `[1, 2, 3]`
-- **Architecture**: Sequential stack of identical blocks
+### 2. Attention Mechanism (`attention.py`)
+
+Basic implementation of scaled dot-product attention mechanism.
+
+**Key Concepts:**
+- **Query, Key, Value**: Linear transformations of input embeddings
+- **Attention Weights**: Softmax of scaled dot-product scores
+- **Output**: Weighted combination of values using attention weights
+
+**Architecture:**
+- Input: `(batch_size, seq_len, embed_dim)`
+- Output: `(batch_size, seq_len, embed_dim)`
 
 ## 🔬 Methodology
 
-The script performs the following analysis:
+Each example follows a consistent approach:
 
-1. **Forward Pass**: Propagates input through both networks
-2. **Backward Pass**: Computes gradients with respect to:
-   - Final layer activations
-   - Input gradients
-   - First layer weight gradients
-3. **Comparison**: Side-by-side analysis of gradient magnitudes and flow
+1. **Clear Implementation**: Minimal, readable code
+2. **Educational Focus**: Comments explaining key concepts
+3. **Practical Output**: Visual results and comparisons
+4. **Self-Contained**: No external dependencies beyond PyTorch
 
-## 📊 Results
+## 📊 Example Outputs
 
-### Residual Network
+### Residual vs Plain Blocks
 ```
+Residual Network:
 Final Output: [[8.760121  2.0753431 2.5167747]]
 Input Gradients: [[-1.8296819  4.0609355  3.6003714]]
-First Layer Weight Gradients: 
-[[-0.2950688 -0.5901376 -0.8852064]
- [ 3.5320826  7.064165  10.596248 ]
- [ 3.0706484  6.141297   9.211946 ]]
-```
 
-### Plain Network
-```
+Plain Network:
 Final Output: [[-0.49245155 -0.16423884  0.34569877]]
 Input Gradients: [[ 0.00071465 -0.0004733  -0.00085846]]
-First Layer Weight Gradients:
-[[ 1.8755258e-03  3.7510516e-03  5.6265774e-03]
- [ 1.0151875e-03  2.0303749e-03  3.0455624e-03]
- [-8.5578213e-05 -1.7115643e-04 -2.5673464e-04]]
+```
+
+### Attention Mechanism
+```
+Attention Weights: [[0.3333, 0.3333, 0.3333], ...]
+Attention Output: [[tensor values...]]
 ```
 
 ## 💡 Key Insights
 
-- **Residual Network**: Maintains strong gradients and higher final outputs
-- **Plain Network**: Shows rapid gradient attenuation, demonstrating the vanishing gradient problem
-- **Magnitude Difference**: Residual gradients are orders of magnitude larger than plain network gradients
+- **Residual Connections**: Essential for training deep networks effectively
+- **Attention Mechanisms**: Foundation for modern transformer architectures
+- **Gradient Flow**: Critical for understanding network training dynamics
 
 ## 🚀 Quick Start
 
@@ -71,9 +78,13 @@ First Layer Weight Gradients:
 pip install -r requirements.txt
 ```
 
-### Run the Demo
+### Run Examples
 ```bash
+# Residual vs Plain Blocks
 python compare_blocks.py
+
+# Attention Mechanism
+python attention.py
 ```
 
 ### Clone Repository
@@ -86,7 +97,8 @@ cd residuals
 
 ```
 residuals/
-├── compare_blocks.py    # Main demonstration script
+├── compare_blocks.py    # Residual vs Plain blocks comparison
+├── attention.py         # Basic attention mechanism
 ├── requirements.txt     # Python dependencies
 └── README.md          # This file
 ```
@@ -96,7 +108,17 @@ residuals/
 - `torch` - PyTorch deep learning framework
 - `numpy` - Numerical computing library
 
+
+
 ## 📚 Further Reading
 
 - [ResNet Paper](https://arxiv.org/abs/1512.03385) - Original residual network paper
+- [Attention Is All You Need](https://arxiv.org/abs/1706.03762) - Transformer paper
 - [PyTorch Documentation](https://pytorch.org/docs/) - PyTorch framework reference
+
+## 🤝 Contributing
+
+Feel free to contribute additional examples or improvements to existing ones. Each example should be:
+- Self-contained and runnable
+- Well-documented with clear comments
+- Educational and focused on key concepts
