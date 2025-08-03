@@ -1,2 +1,5 @@
 numpy
 torch
+pytorch_lightning
+torchvision
+torchmetrics
