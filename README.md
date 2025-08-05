@@ -81,7 +81,29 @@ Basic implementation of scaled dot-product attention mechanism.
 - Input: `(batch_size, seq_len, embed_dim)`
 - Output: `(batch_size, seq_len, embed_dim)`
 
-### 6. PyTorch Lightning Training (`lightning.py`)
+### 6. Autoencoder (`autoencoder.py`)
+
+Simple autoencoder for dimensionality reduction and feature learning through unsupervised reconstruction.
+
+**Key Concepts:**
+- **Unsupervised Learning**: Learning without labels through reconstruction
+- **Dimensionality Reduction**: Compressing high-dimensional data into latent space
+- **Feature Learning**: Discovering meaningful compressed representations
+- **Bottleneck Architecture**: Forcing information compression through narrow latent space
+- **Reconstruction Loss**: Measuring how well original data is preserved
+
+**Architecture:**
+- **Encoder**: `input_dim → 128 → latent_dim` (compression)
+- **Decoder**: `latent_dim → 128 → input_dim` (reconstruction)
+- **Loss**: Mean Squared Error between input and reconstruction
+
+**Applications:**
+- Data compression and denoising
+- Feature extraction for downstream tasks
+- Anomaly detection through reconstruction error
+- Dimensionality reduction for visualization
+
+### 7. PyTorch Lightning Training (`lightning.py`)
 
 Complete training pipeline using PyTorch Lightning framework.
 
@@ -139,6 +161,15 @@ Attention Weights: [[0.3333, 0.3333, 0.3333], ...]
 Attention Output: [[tensor values...]]
 ```
 
+### Autoencoder Reconstruction
+```python
+x = torch.randn(4, 784)  # Flattened MNIST images
+model = SimpleAutoencoder(input_dim=784, latent_dim=32)
+reconstructed = model(x)
+print(reconstructed.shape)  # [4, 784]
+print("Reconstruction loss:", loss.item())
+```
+
 ## 💡 Key Insights
 
 - **CNN**: Effective for spatial feature extraction from images
@@ -146,6 +177,7 @@ Attention Output: [[tensor values...]]
 - **Hybrid Architectures**: Combine different neural network types
 - **Residual Connections**: Essential for training deep networks effectively
 - **Attention Mechanisms**: Foundation for modern transformer architectures
+- **Autoencoders**: Unsupervised learning through reconstruction and dimensionality reduction
 - **Training Frameworks**: PyTorch Lightning provides structured training
 
 ## 🚀 Quick Start
@@ -172,6 +204,9 @@ python compare_blocks.py
 # Attention mechanism demonstration
 python attention.py
 
+# Autoencoder for dimensionality reduction
+python autoencoder.py
+
 # PyTorch Lightning training pipeline
 python lightning.py
 ```
@@ -191,6 +226,7 @@ nn/
 ├── cnnrnn.py           # CNN-RNN hybrid for sequence classification
 ├── compare_blocks.py   # Residual vs Plain blocks comparison
 ├── attention.py        # Basic attention mechanism
+├── autoencoder.py      # Autoencoder for dimensionality reduction
 ├── lightning.py        # PyTorch Lightning training pipeline
 ├── requirements.txt    # Python dependencies
 └── README.md          # This file
